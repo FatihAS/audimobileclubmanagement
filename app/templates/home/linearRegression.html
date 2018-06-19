@@ -1,0 +1,163 @@
+{% extends "admin/layout/layout.html" %}
+{% block header %}
+    {% include "admin/layout/sidebar.html" %}
+{% endblock %}
+{% block sidebar %}
+    {% include "admin/layout/header.html" %}
+{% endblock %}
+{% block content %}
+<!-- Page wrapper  -->
+<div class="page-wrapper">
+    <!-- Bread crumb -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-primary">Dashboard</h3> </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </div>
+    </div>
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>568120</h2>
+                            <p class="m-b-0">Total Revenue</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-shopping-cart f-s-40 color-success"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>1178</h2>
+                            <p class="m-b-0">Sales</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-archive f-s-40 color-warning"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>25</h2>
+                            <p class="m-b-0">Stores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>847</h2>
+                            <p class="m-b-0">Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bg-white m-l-0 m-r-0 box-shadow ">
+            <!-- Tabel Hasil Panen -->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Linear Regression Data</h4>
+                        <h6 class="card-subtitle">Result of Linear Regression Calculation for Every City</h6>
+                        <div class="table-responsive m-t-40">
+                            <table id="myTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Wilayah</th>
+                                        <th>Provinsi</th>
+                                        <th>Kota</th>
+                                        <th>Calculation</th>
+                                        <th>MAPE ( Error Percentage )</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- column -->
+        </div>
+        <!-- End PAge Content -->
+    </div>
+    <!-- End Container fluid  -->
+</div>
+<!-- End Page wrapper  -->
+{% endblock %}
+{% block footer %}
+    {% include "admin/layout/footer.html" %}
+{% endblock %}
+{% block js %}
+    {% include "admin/layout/js.html" %}
+    <script src="/js/lib/datatables/datatables.min.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="/js/lib/datatables/datatables-init.js"></script>
+    <script>
+        $( document ).ready(function() {
+            $("#menuDataMining").addClass("active");
+            $("#menuDataMining").children().attr("aria-expanded","true");
+            $("#menuDataMining > ul").addClass("in");
+
+            for(x = 0; x < $("#menuDataMining > ul > li").length; x++){
+                if($("#menuDataMining > ul > li")[x].innerText == "Linear Regression"){
+                    $("a",$("#menuDataMining > ul > li")[x]).addClass("active");
+                }
+            }
+
+            $.ajax({ 
+                type: 'GET', 
+                url: 'https://api.agri.gravicodev.com/pred/lr', 
+                dataType: 'json',
+                success: function (data) { 
+                    var x = "";
+                    $('#myTable').DataTable().destroy();
+                    $("#bodyTable").append("Inserting Data");
+                    $.each(data, function(index, element) {
+                        x += '<tr>';
+                        x += '<td>'+ element.kode_wilayah +'</td>';
+                        x += '<td>'+ element.Provinsi +'</td>';
+                        x += '<td>'+ element.Kabupaten +'</td>';
+                        x += '<td>'+ element.Constanta + ' + ' +element.Multiplier + 'X</td>';
+                        x += '<td>'+ element.RMSE +'</td>';
+                        x += '</tr>';
+                    });
+                    $("#bodyTable").html(x);
+                    $('#myTable').DataTable().draw();
+                }
+            });
+        });
+    </script>
+{% endblock %}

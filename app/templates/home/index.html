@@ -1,0 +1,95 @@
+{% extends "home/layout/layout.html" %}
+{% block header %}
+    {% include "home/layout/header.html" %}
+{% endblock %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<!-- Page wrapper  -->
+<div class="page-wrapper">
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-pagelines f-s-40 color-primary"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2 class="total-harvest">-</h2>
+                            <p class="m-b-0">Total Harvest 2016</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-globe f-s-40 color-success"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2 class="total-city">1178</h2>
+                            <p class="m-b-0">Total City</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-archive f-s-40 color-warning"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>25</h2>
+                            <p class="m-b-0">Stores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-30">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>847</h2>
+                            <p class="m-b-0">Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+    <!-- End Container fluid  -->
+</div>
+<!-- End Page wrapper  -->
+{% endblock %}
+{% block footer %}
+    {% include "home/layout/footer.html" %}
+{% endblock %}
+{% block js %}
+    {% include "home/layout/js.html" %}
+    <script src="/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="/js/lib/datatables/datatables.min.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="/js/lib/datatables/datatables-init.js"></script>
+{% endblock %}
