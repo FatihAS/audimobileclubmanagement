@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect
 from app.session.controllers import check_login_session as check_login_session
+from app.tuyul.db import db
+import json
 
 tuyul = Blueprint('tuyul',__name__, url_prefix='/admin')
 
@@ -17,7 +19,20 @@ def dashboard():
 def list_tuyul():
     if check_login_session():
         if request.method == "GET":
-            return render_template("admin/list-tuyul.html")
+            title = db.getAllTitle()
+            return render_template("admin/list-tuyul.html",title=json.loads(title))
+        else:
+            return redirect("/")    
+    else:
+        return redirect("/")
+
+@tuyul.route('/edit-tuyul/<id>',methods=['GET','POST'])
+def edit_tuyul(id):
+    if check_login_session():
+        if request.method == "GET":
+            tuyul = db.getTuyul(id=id)
+            title = db.getAllTitle()
+            return render_template("admin/edit-tuyul.html",tuyul=json.loads(tuyul),title=json.loads(title))
         else:
             return redirect("/")    
     else:

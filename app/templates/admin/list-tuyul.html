@@ -75,10 +75,11 @@
                             <table id="tabel-tuyul" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>username</th>
-                                        <th>password</th>
-                                        <th>title</th>
-                                        <th>ruby</th>
+                                        <th class="w-20">username</th>
+                                        <th class="w-20">password</th>
+                                        <th class="w-20">title</th>
+                                        <th class="w-20">ruby</th>
+                                        <th class="w-20"></th>
                                     </tr>
                                 </thead>
                                 <tbody id="bodyTable">
@@ -89,7 +90,67 @@
                 </div>
             </div>
             <!-- column -->
+        </div>  
+
+        <!-- form add tuyul -->
+        <div class="row">
+            <div class="col-lg-12" >
+                <div class="card" id="form_ambil_data">
+                    <div class="card-title">
+                        <h4>Tambah Tuyul</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" id="input-username">
+                                    <input type="text" class="form-control input-rounded" name="username" placeholder="Username" id="frm-username">
+                                    <label class="control-label" style="display: none;" id="label-username"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" id="input-password">
+                                    <input type="text" class="form-control input-rounded" name="password" placeholder="Password" id="frm-password">
+                                    <label class="control-label" style="display: none;" id="label-password"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" id="input-title">
+                                    <select class="form-control input-rounded" name="tahun_awal" id="frm-title">
+                                        <option value="" disabled selected>Title</option>
+                                        {% for x in title %}
+                                            <option value="{{x['id']}}">{{x['nama_title']}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label class="control-label" style="display: none;" id="label-title"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" id="input-ruby" >
+                                    <input type="text" class="form-control input-rounded" name="ruby" placeholder="Ruby" id="frm-ruby">
+                                    <label class="control-label" style="display: none;" id="label-ruby"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button id="submit-form" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- end form add tuyul -->
+
         <!-- End PAge Content -->
     </div>
     <!-- End Container fluid  -->
@@ -110,6 +171,7 @@
     <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="/js/lib/datatables/datatables-init.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $( document ).ready(function() {
             $("#menuDataMining").addClass("active");
@@ -122,24 +184,174 @@
                 }
             }
 
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('idtuyul') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('.modal-title').text('New message to ' + recipient)
+                modal.find('.modal-body input').val(recipient)
+            })
+
+            $("#submit-form").click(function(){
+                $('#input-username').removeClass("has-error");
+                $('#input-title').removeClass("has-error");
+                $('#input-password').removeClass("has-error");
+                $('#input-ruby').removeClass("has-error");
+                $('#label-username').hide();
+                $('#label-title').hide();
+                $('#label-password').hide();
+                $('#label-ruby').hide();
+
+                var username = $('#frm-username').val();
+                var password = $('#frm-password').val();
+                var title = $('#frm-title').val();
+                var ruby = $('#frm-ruby').val();
+                var valid = true;
+
+                if(!username){
+                    $('#input-username').addClass("has-error");
+                    $('#label-username').html("Masukkan username");
+                    $('#label-username').show();
+                    valid = false
+                }       
+
+                if(!password){
+                    $('#input-password').addClass("has-error");
+                    $('#label-password').html("Masukkan Password");
+                    $('#label-password').show();
+                    valid = false
+                }
+
+                if(!title){
+                    $('#input-title').addClass("has-error");
+                    $('#label-title').html("Masukkan Title");
+                    $('#label-title').show();
+                    valid = false
+                }
+                
+                if(!ruby){
+                    $('#input-ruby').addClass("has-error");
+                    $('#label-ruby').html("Masukkan Ruby");
+                    $('#label-ruby').show();
+                    valid = false
+                }
+
+                $("#frm-ruby").on('change keydown paste input', function(){
+                    $('#input-ruby').removeClass("has-error");
+                    $('#label-ruby').hide();
+                    let ruby = $("#frm-ruby").val();
+                    console.log(ruby)
+                    if(isNaN(ruby) || ruby == ""){
+                        $('#input-ruby').addClass("has-error");
+                        $('#label-ruby').html("Ruby tidak valid");
+                        $('#label-ruby').show();
+                        valid = false;
+                    }else{
+                        valid = true;
+                    }
+                });
+
+                var data = {}
+                data['username'] = username
+                data['password'] = password
+                data['title'] = title
+                data['ruby'] = ruby
+
+                if(valid){
+                    $.ajax({
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        dataType: 'json',
+                        success: function(data){
+                            console.log(data);
+                            if(data['status']){
+                                $('#frm-username').val("");
+                                $('#frm-password').val("");
+                                $('#frm-title').val("");
+                                $('#frm-ruby').val("");
+                                refreshTabel();
+                                swal("Succes", "1 Row Added", "success");
+                            }else{
+                                swal("Error", data['message'], "warning");
+                            }
+
+                        },
+                        error: function(){
+                            console.log("Device control failed");
+                        },
+                        type: 'POST',
+                        url: 'http://localhost:8099/api/tuyul'
+                    });
+                }
+
+            });
+            
+            refreshTabel();
+        });
+
+        function refreshTabel(){
             $.ajax({ 
                 type: 'GET', 
                 url: 'http://localhost:8099/api/tuyul', 
                 dataType: 'json',
                 success: function (data) { 
                     var x = "";
-                    $('#tabel-tuyul').DataTable().clear();
                     var totalRuby = 0;
-                    for(var x = 0; x < data.length; x++){                   
-                        $('#tabel-tuyul').DataTable().row.add([data[x].username,data[x].password,data[x].title,data[x].ruby]);
-                        $('#tabel-tuyul').DataTable().draw();
-                        totalRuby += data[x].ruby;
-                    }
+                    var button = ""
+                    var id = ""                        
+                    $('#tabel-tuyul').DataTable().destroy();
+                    $("#bodyTable").append("Inserting Data");
+                    $.each(data, function(index, element) {
+                        x += '<tr>';
+                        x += '<td>'+ element.username +'</td>';
+                        x += '<td>'+ element.password +'</td>';
+                        x += '<td>'+ element.title +'</td>';
+                        x += '<td>'+ element.ruby +'</td>';
+                        x += '<td><a href="/admin/edit-tuyul/'+ element.id +'"><button type="button" class="btn btn-info">Edit</button></a><button type="button" class="btn btn-danger" onclick="deleteTuyul('+element.id+')">Delete</button></td>';
+                        x += '</tr>';
+                        totalRuby += element.ruby;
+                    });
+                    $("#bodyTable").html(x);
+                    $('#tabel-tuyul').DataTable().draw();
+
                     $('.span-total-tuyul').html(data.length);
                     $('.span-total-ruby').html(totalRuby);
                     $('.span-total-campscore').html(parseInt(totalRuby/6));
                 }
             });
-        });
+        }
+        
+        function deleteTuyul(id){
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        dataType: 'json',
+                        success: function(data){
+                            swal("Poof! Your data has been deleted!", {
+                                icon: "success",
+                            });
+                            refreshTabel();
+                        },
+                        error: function(){
+                            console.log("Device control failed");
+                        },
+                        type: 'GET',
+                        url: 'http://localhost:8099/api/tuyul/delete/'+id
+                    });
+                } else {
+                    swal("Your data file is safe!");
+                }
+            });
+
+        }
     </script>
 {% endblock %}
