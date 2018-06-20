@@ -21,6 +21,15 @@
                 <br/>
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="form-group" id="input-nickname">
+                            <input type="text" class="form-control input-rounded" name="password" value="{{ tuyul[0]['nickname'] }}" id="frm-nickname">
+                            <label class="control-label" style="display: none;" id="label-nickname"></label>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-lg-12">
                         <div class="form-group" id="input-password">
                             <input type="text" class="form-control input-rounded" name="password" value="{{ tuyul[0]['password'] }}" id="frm-password">
                             <label class="control-label" style="display: none;" id="label-password"></label>
@@ -75,13 +84,16 @@
                 $('#input-title').removeClass("has-error");
                 $('#input-password').removeClass("has-error");
                 $('#input-ruby').removeClass("has-error");
+                $('#input-nickname').removeClass("has-error");
                 $('#label-username').hide();
                 $('#label-title').hide();
                 $('#label-password').hide();
                 $('#label-ruby').hide();
+                $('#label-nickname').hide();
 
                 var username = $('#frm-username').val();
                 var password = $('#frm-password').val();
+                var nickname = $('#frm-nickname').val();
                 var title = $('#frm-title').val();
                 var ruby = $('#frm-ruby').val();
                 var id = $('#frm-id').val();
@@ -93,6 +105,13 @@
                     $('#label-username').show();
                     valid = false
                 }       
+
+                if(!nickname){
+                    $('#input-nickname').addClass("has-error");
+                    $('#label-nickname').html("Masukkan nickname");
+                    $('#label-nickname').show();
+                    valid = false
+                }
 
                 if(!password){
                     $('#input-password').addClass("has-error");
@@ -136,6 +155,7 @@
                 data['title'] = title
                 data['ruby'] = ruby
                 data['id'] = id
+                data['nickname'] = nickname
 
                 if(valid){
                     $.ajax({

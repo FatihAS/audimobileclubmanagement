@@ -13,7 +13,7 @@ def dashboard():
         else:
             return redirect("/")    
     else:
-        return redirect("/")
+        return redirect("/auth/signin")
 
 @tuyul.route('/tuyul-list-tuyul',methods=['GET','POST'])
 def list_tuyul():
@@ -43,7 +43,7 @@ def edit_tuyul(id):
 def pusher():
     if check_login_session():
         if request.method == "GET":
-            return render_template("admin/pusher.html")
+            return render_template("admin/list-pusher.html")
         else:
             return redirect("/")    
     else:

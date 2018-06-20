@@ -32,7 +32,7 @@
                         </div>
                         <div class="media-body media-text-right">
                             <h2 class="span-total-tuyul"></h2>
-                            <p class="m-b-0">Total Tuyul</p>
+                            <p class="m-b-0">Total Tuyul di Push</p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="media-body media-text-right">
                             <h2 class="span-total-ruby"></h2>
-                            <p class="m-b-0">Total Ruby</p>
+                            <p class="m-b-0">Total Ruby di Push</p>
                         </div>
                     </div>
                 </div>
@@ -58,29 +58,33 @@
                         </div>
                         <div class="media-body media-text-right">
                             <h2 class="span-total-campscore"></h2>
-                            <p class="m-b-0">Total Camp Score</p>
+                            <p class="m-b-0">Total Camp Score di Push</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- card list pusher -->
         <div class="row bg-white m-l-0 m-r-0 box-shadow ">
             <!-- Tabel Hasil Panen -->
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">List Tuyul</h4>
+                        <h4 class="card-title">List Pusher</h4>
                         <div class="table-responsive m-t-40">
                             <table id="tabel-tuyul" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="w-15">username</th>
-                                        <th class="w-15">nickname</th>
-                                        <th class="w-15">password</th>
-                                        <th class="w-15">title</th>
-                                        <th class="w-15">ruby</th>
-                                        <th class="w-25"></th>
+                                        <tr>
+                                            <th class="w-12">Nick Pusher</th>
+                                            <th class="w-12">username</th>
+                                            <th class="w-12">nickname</th>
+                                            <th class="w-12">password</th>
+                                            <th class="w-12">title</th>
+                                            <th class="w-12">ruby</th>
+                                            <th class="w-28"></th>
+                                        </tr>
                                     </tr>
                                 </thead>
                                 <tbody id="bodyTable">
@@ -92,13 +96,44 @@
             </div>
             <!-- column -->
         </div>  
+        <!-- end card list pusher -->
+        <br/>
+        <!-- card list tuyul tersedia -->
+        <div class="row bg-white m-l-0 m-r-0 box-shadow ">
+            <!-- Tabel Hasil Panen -->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">List Tuyul Tersedia</h4>
+                        <div class="table-responsive m-t-40">
+                            <table id="tabel-pusher" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="w-15">username</th>
+                                        <th class="w-15">nickname</th>
+                                        <th class="w-15">password</th>
+                                        <th class="w-15">title</th>
+                                        <th class="w-15">ruby</th>
+                                        <th class="w-25"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body-tabel-tuyultersedia">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- column -->
+        </div>  
+        <!-- endcard tuyul tersedia -->
 
         <!-- form add tuyul -->
         <div class="row">
             <div class="col-lg-12" >
-                <div class="card" id="form_ambil_data">
+                <div class="card" id="card_add_pusher">
                     <div class="card-title">
-                        <h4>Tambah Tuyul</h4>
+                        <h4>Tambah Pusher</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -112,44 +147,13 @@
                         <br/>
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="form-group" id="input-nickname">
-                                    <input type="text" class="form-control input-rounded" name="nickname" placeholder="nickname" id="frm-nickname">
-                                    <label class="control-label" style="display: none;" id="label-nickname"></label>
+                                <div class="form-group" id="input-pushername">
+                                    <input type="text" class="form-control input-rounded" name="pushername" placeholder="Pusher Nick" id="frm-pushername">
+                                    <label class="control-label" style="display: none;" id="label-pushername"></label>
                                 </div>
                             </div>
                         </div>
                         <br/>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group" id="input-password">
-                                    <input type="text" class="form-control input-rounded" name="password" placeholder="Password" id="frm-password">
-                                    <label class="control-label" style="display: none;" id="label-password"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group" id="input-title">
-                                    <select class="form-control input-rounded" name="tahun_awal" id="frm-title">
-                                        <option value="" disabled selected>Title</option>
-                                        {% for x in title %}
-                                            <option value="{{x['id']}}">{{x['nama_title']}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <label class="control-label" style="display: none;" id="label-title"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group" id="input-ruby" >
-                                    <input type="text" class="form-control input-rounded" name="ruby" placeholder="Ruby" id="frm-ruby">
-                                    <label class="control-label" style="display: none;" id="label-ruby"></label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <button id="submit-form" class="btn btn-default">Submit</button>
@@ -206,22 +210,13 @@
 
             $("#submit-form").click(function(){
                 $('#input-username').removeClass("has-error");
-                $('#input-title').removeClass("has-error");
-                $('#input-password').removeClass("has-error");
-                $('#input-ruby').removeClass("has-error");
-                $('#input-nickname').removeClass("has-error");
+                $('#input-pushername').removeClass("has-error");
                 $('#label-username').hide();
-                $('#label-title').hide();
-                $('#label-password').hide();
-                $('#label-ruby').hide();
-                $('#label-nickname').hide();
+                $('#label-pushername').hide();
 
                 var username = $('#frm-username').val();
-                var password = $('#frm-password').val();
-                var nickname = $('#frm-nickname').val();
-                var title = $('#frm-title').val();
-                var ruby = $('#frm-ruby').val();
-                var valid = true;
+                var pushername = $('#frm-pushername').val();
+                var valid = true
 
                 if(!username){
                     $('#input-username').addClass("has-error");
@@ -230,57 +225,18 @@
                     valid = false
                 }     
 
-                if(!nickname){
-                    $('#input-nickname').addClass("has-error");
-                    $('#label-nickname').html("Masukkan nickname");
-                    $('#label-nickname').show();
+                if(!pushername){
+                    $('#input-pushername').addClass("has-error");
+                    $('#label-pushername').html("Masukkan Pusher Nickname");
+                    $('#label-pushername').show();
                     valid = false
                 }     
-
-                if(!password){
-                    $('#input-password').addClass("has-error");
-                    $('#label-password').html("Masukkan Password");
-                    $('#label-password').show();
-                    valid = false
-                }
-
-                if(!title){
-                    $('#input-title').addClass("has-error");
-                    $('#label-title').html("Masukkan Title");
-                    $('#label-title').show();
-                    valid = false
-                }
-                
-                if(!ruby){
-                    $('#input-ruby').addClass("has-error");
-                    $('#label-ruby').html("Masukkan Ruby");
-                    $('#label-ruby').show();
-                    valid = false
-                }
-
-                $("#frm-ruby").on('change keydown paste input', function(){
-                    $('#input-ruby').removeClass("has-error");
-                    $('#label-ruby').hide();
-                    let ruby = $("#frm-ruby").val();
-                    console.log(ruby)
-                    if(isNaN(ruby) || ruby == ""){
-                        $('#input-ruby').addClass("has-error");
-                        $('#label-ruby').html("Ruby tidak valid");
-                        $('#label-ruby').show();
-                        valid = false;
-                    }else{
-                        valid = true;
-                    }
-                });
-
-                var data = {}
-                data['username'] = username
-                data['password'] = password
-                data['title'] = title
-                data['ruby'] = ruby
-                data['nickname'] = nickname
-
+            
                 if(valid){
+                    var data = {}
+                    data['username'] = username
+                    data['pushername'] = pushername
+
                     $.ajax({
                         contentType: 'application/json',
                         data: JSON.stringify(data),
@@ -289,9 +245,7 @@
                             console.log(data);
                             if(data['status']){
                                 $('#frm-username').val("");
-                                $('#frm-password').val("");
-                                $('#frm-title').val("");
-                                $('#frm-ruby').val("");
+                                $('#frm-pushername').val("");
                                 refreshTabel();
                                 swal("Succes", "1 Row Added", "success");
                             }else{
@@ -303,7 +257,7 @@
                             console.log("Device control failed");
                         },
                         type: 'POST',
-                        url: 'http://localhost:8099/api/tuyul'
+                        url: 'http://localhost:8099/api/pusher'
                     });
                 }
 
@@ -315,7 +269,7 @@
         function refreshTabel(){
             $.ajax({ 
                 type: 'GET', 
-                url: 'http://localhost:8099/api/tuyul', 
+                url: 'http://localhost:8099/api/pusher', 
                 dataType: 'json',
                 success: function (data) { 
                     var x = "";
@@ -326,12 +280,13 @@
                     $("#bodyTable").append("Inserting Data");
                     $.each(data, function(index, element) {
                         x += '<tr>';
+                        x += '<td>'+ element.nick_pusher +'</td>';
                         x += '<td>'+ element.username +'</td>';
                         x += '<td>'+ element.nickname +'</td>';
                         x += '<td>'+ element.password +'</td>';
                         x += '<td>'+ element.title +'</td>';
                         x += '<td>'+ element.ruby +'</td>';
-                        x += '<td><a href="/admin/edit-tuyul/'+ element.id +'"><button type="button" class="btn btn-info">Edit</button></a><button type="button" class="btn btn-danger" onclick="deleteTuyul('+element.id+')">Delete</button></td>';
+                        x += '<td><button type="button" class="btn btn-danger" onclick="deletePusher('+element.id_pusher+')">Delete</button></td>';
                         x += '</tr>';
                         totalRuby += element.ruby;
                     });
@@ -343,9 +298,32 @@
                     $('.span-total-campscore').html(parseInt(totalRuby/6));
                 }
             });
+
+            $.ajax({ 
+                type: 'GET', 
+                url: 'http://localhost:8099/api/sisatuyul', 
+                dataType: 'json',
+                success: function (data) { 
+                    var x = "";
+                    $('#tabel-pusher').DataTable().destroy();
+                    $("#body-tabel-tuyultersedia").append("Inserting Data");
+                    $.each(data, function(index, element) {
+                        x += '<tr>';
+                        x += '<td>'+ element.username +'</td>';
+                        x += '<td>'+ element.nickname +'</td>';
+                        x += '<td>'+ element.password +'</td>';
+                        x += '<td>'+ element.title +'</td>';
+                        x += '<td>'+ element.ruby +'</td>';
+                        x += '<td><button type="button" class="btn btn-info" onclick="useTuyul(\''+element.username+'\')">Use This Tuyul</button></td>';
+                        x += '</tr>';
+                    });
+                    $("#body-tabel-tuyultersedia").html(x);
+                    $('#tabel-pusher').DataTable().draw();
+                }
+            });
         }
         
-        function deleteTuyul(id){
+        function deletePusher(id){
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this data!",
@@ -367,13 +345,21 @@
                             console.log("Device control failed");
                         },
                         type: 'GET',
-                        url: 'http://localhost:8099/api/tuyul/delete/'+id
+                        url: 'http://localhost:8099/api/pusher/delete/'+id
                     });
                 } else {
                     swal("Your data file is safe!");
                 }
             });
 
+        }
+
+        function useTuyul(username){
+            $("#frm-username").val(username)
+            window.scrollTo({
+                top: $('#card_add_pusher').offset().top - 100,
+                behavior: "smooth"
+            })
         }
     </script>
 {% endblock %}
